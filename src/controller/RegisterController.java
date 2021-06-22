@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import emailservice.SendEmail;
+import model.Register;
 
 /**
  * Servlet implementation class RegisterController
@@ -26,7 +30,21 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String fname=request.getParameter("fname");
+		String lname=request.getParameter("lname");
+		String mobile=request.getParameter("mobile");
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
 		
+		SendEmail sm=new SendEmail();
+		String code= sm.getRandom();
+		
+		Register rg=new Register(fname, lname, mobile, email, password, code);
+		
+		
+		HttpSession session= request.getSession();
+		session.setAttribute("register", rg);
+		session.setAttribute("code", code);
 	}
 
 	/**
