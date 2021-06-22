@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+/* .upspace {
+    height: 15vh;
+    background-color: #08145E;
+    box-sizing: border-box;
+} */
+
+.navbar{
+    background-color: #08145E;
+    color: white !important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.main-content {
+    color: white;
+    height: 100vh;
+    background-color: #08145E;
+}
+
+.info {
+    font-family: 'Poppins',sans-serif;
+}
+
+hr {
+    border-top: white solid 2px;
+}
+
+.card {
+    color: black;
+}
+
+.form-header {
+    font-family: 'Lato', sans-serif;
+}
+
+.btn{
+    background-color: #08145E;
+}
