@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDao;
 import model.Register;
 
 /**
@@ -34,7 +35,14 @@ public class VerifyController extends HttpServlet {
 		String icode=request.getParameter("code");
 		if(code.equals(icode)) {
 			Register rg=(Register)session.getAttribute("register");
-			response.sendRedirect("login.jsp");
+			UserDao dao=new UserDao();
+			int i=dao.create(rg);
+			if(i>0) {
+				response.sendRedirect("login.jsp");
+			}
+			else {
+				response.sendRedirect("index.jsp");
+			}
 		}
 		else {
 			response.sendRedirect("index.jsp");

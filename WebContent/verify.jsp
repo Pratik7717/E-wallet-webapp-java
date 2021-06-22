@@ -65,10 +65,10 @@
                     <div class="card">
                         <div class="card-body">
                           <h5 class="card-title form-header">Account Verification</h5>
-                          <form method="post" action="">
+                          <form method="post" action="VerifyController">
                             <div class="form-group col">
                                 <label for="code">Verification code</label>
-                                <input type="email" class="form-control" name="code" id="code" required>
+                                <input type="text" class="form-control" name="code" id="code" required>
                             </div>
                             <div class="form-group col text-center">
                                 <button type="submit" class="btn btn-primary btn-block">Verify</button>
