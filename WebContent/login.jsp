@@ -19,6 +19,9 @@
 </head>
 
 <body>
+
+	<%session.removeAttribute("register"); %>
+	
     <!-- naviagation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand mx-5" href="./index.html"><img src="./images/linkcode.png" width="100" alt=""></a>
