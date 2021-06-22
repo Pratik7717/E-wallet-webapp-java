@@ -94,7 +94,13 @@
                     password : password
                 },
                 success : function(data) {
-                    window.location="verify.jsp";
+                	if(data!="error")
+                    	window.location="verify.jsp";
+                    else {
+                    	alert("we got error while sending an email");
+                    	$(".loader").hide();
+            			$("#content").show();
+                    }
                 },
                 error : function() {
                     alert("error in transfering req to register controller")

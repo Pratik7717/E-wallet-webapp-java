@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,8 +45,16 @@ public class RegisterController extends HttpServlet {
 		
 		
 		HttpSession session= request.getSession();
-		session.setAttribute("register", rg);
-		session.setAttribute("code", code);
+		PrintWriter pw=response.getWriter();
+		boolean test=sm.sendEmail(rg);
+		if(test) {
+			session.setAttribute("register", rg);
+			session.setAttribute("code", code);
+		}
+		else {
+			pw.println("error");
+		}
+		
 	}
 
 	/**
