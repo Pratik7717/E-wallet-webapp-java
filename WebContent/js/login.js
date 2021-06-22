@@ -20,7 +20,14 @@
                 password : password
             },
             success : function(data) {
-                window.location="dashboard.jsp";
+                if(data!="invalid credentials..") {
+                	window.location="dashboard.jsp";
+                }	
+                else {
+                	alert(data);
+                	$(".loader").hide();
+                	$("#content").show();
+                }
             },
             error : function() {
                 $(".loader").hide();
