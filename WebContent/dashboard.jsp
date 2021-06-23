@@ -1,9 +1,11 @@
+<%@page import="model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
 <head>
+	<% String password=(String)session.getAttribute("password"); %>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,13 +28,54 @@
                 e.preventDefault();
                 let amount=$("#amount").val();
                 let password=$("password").val()
-                // if(password!="<%=password>") {
-                //     alert("Oops.. Invalid password..");
-                //     return;
-                // }
+                if(password!="<%= password %>") {
+                     alert("Oops.. Invalid password..");
+                     return;
+                 }
 
                 amount=amount*100;
-                
+                var options = {
+                    "key": "rzp_test_sjxZ8p7DXfDPlV", // Enter the Key ID generated from the Dashboard
+                    "amount": amount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": "INR",
+                    "name": "Acme Corp",
+                    "description": "Test Transaction",
+                    "image": "./images/linkcode.png",
+                    // "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response){
+                        alert(response.razorpay_payment_id);
+                        // alert(response.razorpay_order_id);
+                        // alert(response.razorpay_signature)
+
+
+                        $(".loader").hide();
+                        $("#content").show();
+                    },
+                    "prefill": {
+                        "name": "Pratik",
+                        "email": "Pratik@gmail.com",
+                        "contact": "9999999999"
+                    },
+                    "notes": {
+                        "address": "Razorpay Corporate Office"
+                    },
+                    "theme": {
+                        "color": "#08145E"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response){
+                        alert(response.error.code);
+                        alert(response.error.description);
+                        alert(response.error.source);
+                        alert(response.error.step);
+                        alert(response.error.reason);
+                        alert(response.error.metadata.order_id);
+                        alert(response.error.metadata.payment_id);
+                });
+                rzp1.open();
+                // e.preventDefault();
+
             });// form submit event callback
 
 
@@ -56,7 +99,7 @@
 
 <body>
 
-    <!-- <% User user=(User)session.getAtrribite("user"); String password=user.getPassword(); %> -->
+    
 
     <!-- naviagation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">

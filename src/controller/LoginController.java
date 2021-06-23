@@ -38,6 +38,7 @@ public class LoginController extends HttpServlet {
 		HttpSession session=request.getSession();
 		if(user!=null) {
 			session.setAttribute("user", user);
+			session.setAttribute("password", user.getPassword());
 		}
 		else {
 			response.getWriter().println("invalid credentials..");
