@@ -41,7 +41,7 @@
                     "key": "rzp_test_sjxZ8p7DXfDPlV", // Enter the Key ID generated from the Dashboard
                     "amount": amount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                     "currency": "INR",
-                    "name": "Acme Corp",
+                    "name": "LinkCodetech Corp",
                     "description": "Test Transaction",
                     "image": "./images/linkcode.png",
                     // "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -49,13 +49,13 @@
                         //alert(response.razorpay_payment_id);
                         // alert(response.razorpay_order_id);
                         // alert(response.razorpay_signature);
-                        let id=$("body").attr("customAttributeId");
+                        let userid=$("body").attr("customAttributeId");
 						$.ajax({
                             type : 'POST',
                             url : 'AddMoneyController',
                             data : {
-                                paymentid : response.payment_id,
-                                userid : id
+                                paymentid : response.razorpay_payment_id,
+                                amount : amount/100
                             },
 							success : function(data) {
 								window.location.reload();
@@ -65,7 +65,7 @@
                     },
                     "prefill": {
                         "name": "Rahul",
-                        "email": "rahul@gmail.com",
+                        "email": "pratikjagade3876@gmail.com",
                         "contact": "8554848460"
                     },
                     "notes": {
