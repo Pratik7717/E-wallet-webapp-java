@@ -42,6 +42,9 @@ public class GetAllPaymentsController extends HttpServlet {
 		list=dao.getAllPayments(id);
 		RequestDispatcher rd=request.getRequestDispatcher("getPayments.jsp");
 		request.setAttribute("list", list);
+		if(list==null) {
+			request.setAttribute("message", "Oops..we could not find any payment for this account");
+		}
 		rd.forward(request, response);
 	}
 

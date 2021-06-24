@@ -124,10 +124,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item mx-4">
-                    <a class="nav-link active" href="./index.html">Recharge</a>
+                    <a class="nav-link active" href="./dashboard.html">Home</a>
                 </li>
                 <li class="nav-item mx-4">
-                    <a class="nav-link active" href="#">Payment history</a>
+                    <a class="nav-link active" href="GetAllPaymentsController">Payment history</a>
                 </li>
                 <li class="nav-item mx-4">
                     <a class="nav-link active" href="#">Privacy terms</a>
