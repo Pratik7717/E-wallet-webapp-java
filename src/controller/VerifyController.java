@@ -32,6 +32,7 @@ public class VerifyController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		String code=(String)session.getAttribute("code");
+		session.removeAttribute("register");
 		String icode=request.getParameter("code");
 		if(code.equals(icode)) {
 			Register rg=(Register)session.getAttribute("register");

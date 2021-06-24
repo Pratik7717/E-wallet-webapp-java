@@ -20,19 +20,18 @@
                 password : password
             },
             success : function(data) {
-                if(data!="invalid credentials..") {
-                	window.location="dashboard.jsp";
+                if(data.trim()==='invalid credentials') {
+                	alert(data);
+                	window.location.reload();                	
                 }	
                 else {
-                	alert(data);
-                	$(".loader").hide();
-                	$("#content").show();
+               		window.location='dashboard.jsp'
+                	
                 }
             },
             error : function() {
-                $(".loader").hide();
-                $("#content").show();
-                alert("error in transfering req to login controller")
+                alert("error in transfering req to login controller");
+                window.location.reload();
             }
         });
     });

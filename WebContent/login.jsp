@@ -19,8 +19,7 @@
 </head>
 
 <body>
-
-	<%session.removeAttribute("register"); %>
+	<%session.invalidate(); %>
 	
     <!-- naviagation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">

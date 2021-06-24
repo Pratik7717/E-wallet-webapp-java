@@ -6,6 +6,7 @@
 
 <head>
 	<% String password=(String)session.getAttribute("password"); %>
+	<% User user=(User)session.getAttribute("user"); %>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +14,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dstyle.css">
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -27,9 +28,11 @@
                 $("#content").hide();
                 e.preventDefault();
                 let amount=$("#amount").val();
-                let password=$("password").val()
-                if(password!="<%= password %>") {
+                let pass=$("#password").val();
+                
+                if(pass!=$("body").attr("customAttributePass")) {
                      alert("Oops.. Invalid password..");
+                     location.reload();
                      return;
                  }
 
@@ -43,18 +46,27 @@
                     "image": "./images/linkcode.png",
                     // "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                     "handler": function (response){
-                        alert(response.razorpay_payment_id);
+                        //alert(response.razorpay_payment_id);
                         // alert(response.razorpay_order_id);
-                        // alert(response.razorpay_signature)
+                        // alert(response.razorpay_signature);
+                        let id=$("body").attr("customAttributeId");
+						$.ajax({
+                            type : 'POST',
+                            url : 'AddMoneyController',
+                            data : {
+                                paymentid : response.payment_id,
+                                userid : id
+                            },
+							success : function(data) {
+								window.location.reload();
+							}
+                        });
 
-
-                        $(".loader").hide();
-                        $("#content").show();
                     },
                     "prefill": {
-                        "name": "Pratik",
-                        "email": "Pratik@gmail.com",
-                        "contact": "9999999999"
+                        "name": "Rahul",
+                        "email": "rahul@gmail.com",
+                        "contact": "8554848460"
                     },
                     "notes": {
                         "address": "Razorpay Corporate Office"
@@ -72,6 +84,7 @@
                         alert(response.error.reason);
                         alert(response.error.metadata.order_id);
                         alert(response.error.metadata.payment_id);
+                        window.location.reload();
                 });
                 rzp1.open();
                 // e.preventDefault();
@@ -97,9 +110,8 @@
     <title>WALLET</title>
 </head>
 
-<body>
+<body customAttributePass="<%=password%>" customeAttributeId="<%=user.getId() %>" >
 
-    
 
     <!-- naviagation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -126,6 +138,7 @@
                     <a class="nav-link active" href="">Logout</a>
                 </li>
             </ul>
+         </div>
     </nav>
 
 
@@ -163,9 +176,9 @@
             </div>
 
             <div class="col-md-6">
-                <div class="showcase-title welcome-msg">Hi..! Mayur</div>
-                <div class="showcase-title">Your balance : $0.00</div>
-                <p class="mt-4 showcase-text">Heyy!! wannna enter the new world of cashless payements? We at LinkCode tech are here to make cashless payments effortless for you. Signup now and enjoy our services..!</p>
+                <div class="showcase-title welcome-msg">Hi..! <%=user.getFname() %></div>
+                <div class="showcase-title">Your balance : $<%= user.getBalance() %></div>
+                <p class="mt-4 showcase-text">Heyy!! wannna enter the new world of cashless payments? We at LinkCode tech are here to make cashless payments effortless for you. Signup now and enjoy our services..!</p>
                 <img class="my-3" src="./images/undraw_pay_online_b1hk.svg" alt="" width="100%">
             </div>
 
