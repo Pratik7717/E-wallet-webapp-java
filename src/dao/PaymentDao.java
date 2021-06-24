@@ -1,7 +1,9 @@
 package dao;
 
 import java.sql.*;
-import java.util.Date;
+//import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import model.Payment;
 
@@ -31,4 +33,30 @@ public class PaymentDao {
 		
 		return i;
 	}
+	
+	
+	public List<Payment> getAllPayments(int id) {
+		List<Payment> list=null;
+		Connection con=MyConnection.getConnection();
+		try {
+			PreparedStatement ps=con.prepareStatement("select * from payments where userid=?");
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				if(list==null) {
+					list=new LinkedList<Payment>();
+				}
+				list.add(new Payment(rs.getString(1),rs.getString(2),rs.getDouble(3),rs.getInt(4)));
+			}
+		} catch (SQLException e) {
+			System.out.println("exception in getallpayments() in paymentdao " + e );
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	
+	
+	
 }
