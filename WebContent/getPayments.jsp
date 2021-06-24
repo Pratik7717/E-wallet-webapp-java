@@ -32,10 +32,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item mx-4">
-                    <a class="nav-link active" href="./dashboard.html">home</a>
+                    <a class="nav-link active" href="./dashboard.jsp">home</a>
                 </li>
                 <li class="nav-item mx-4">
-                    <a class="nav-link active" href="">Payment history</a>
+                    <a class="nav-link active" href="GetAllPaymentsController">Payment history</a>
                 </li>
                 <li class="nav-item mx-4">
                     <a class="nav-link active" href="">Privacy terms</a>
@@ -49,40 +49,33 @@
          </div>
     </nav>
 
-
+	<c:if test="${requestScope.message !=null}">
+		NOTE : ${message}
+	</c:if>
+	
     <div class=" container my-5">
     	
     	<c:if test="${requestScope.list !=null and
  		not empty requestScope.list}">
     	
-	        <table class="table">
+	        <table class="table table-bordered">
 	            <thead class="thead">
 	              <tr>
-	                <th scope="col">#</th>
-	                <th scope="col">First</th>
-	                <th scope="col">Last</th>
-	                <th scope="col">Handle</th>
+	                <th scope="col">Payment Id</th>
+	                <th scope="col">Description</th>
+	                <th scope="col">Amount</th>
+	                <th scope="col">UserId</th>
 	              </tr>
 	            </thead>
 	            <tbody>
-	              <tr>
-	                <th scope="row">1</th>
-	                <td>Mark</td>
-	                <td>Otto</td>
-	                <td>@mdo</td>
-	              </tr>
-	              <tr>
-	                <th scope="row">2</th>
-	                <td>Jacob</td>
-	                <td>Thornton</td>
-	                <td>@fat</td>
-	              </tr>
-	              <tr>
-	                <th scope="row">3</th>
-	                <td>Larry</td>
-	                <td>the Bird</td>
-	                <td>@twitter</td>
-	              </tr>
+		              <c:forEach items="${requestScope.list}" var="p"> 		
+						<tr>
+							<th scope="row">${p.paymentid}</th>
+							<td>${p.description}</td>
+							<td>$${p.amount}</td>
+							<td>${p.userid}</td>
+						</tr>
+					 </c:forEach>
 	            </tbody>
 	          </table>
     	</c:if>
