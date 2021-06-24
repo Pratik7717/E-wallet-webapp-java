@@ -135,7 +135,7 @@
             </ul>
             <ul class="navbar-nav ">
                 <li class="nav-item mr-5">
-                    <a class="nav-link active" href="">Logout</a>
+                    <a class="nav-link active" href="LogoutController">Logout</a>
                 </li>
             </ul>
          </div>
