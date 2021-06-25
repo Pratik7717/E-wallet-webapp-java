@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item mx-4">
-                    <a class="nav-link active" href="index.html">Home</a>
+                    <a class="nav-link active" href="index.jsp">Home</a>
                 </li>
                 <li class="nav-item mx-4">
                     <a class="nav-link active" href="#">About</a>
@@ -49,7 +49,7 @@
             </ul>
             <ul class="navbar-nav ">
                 <li class="nav-item mr-5">
-                    <a class="nav-link active" href="./index.html">Signup</a>
+                    <a class="nav-link active" href="./index.jsp">Signup</a>
                 </li>
             </ul>
          </div>

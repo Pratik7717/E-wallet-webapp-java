@@ -30,14 +30,15 @@ public class VerifyController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
+		HttpSession session=request.getSession(false);
 		String code=(String)session.getAttribute("code");
-		session.removeAttribute("register");
+		
 		String icode=request.getParameter("code");
 		if(code.equals(icode)) {
 			Register rg=(Register)session.getAttribute("register");
 			UserDao dao=new UserDao();
 			int i=dao.create(rg);
+			session.removeAttribute("register");
 			if(i>0) {
 				response.sendRedirect("login.jsp");
 			}

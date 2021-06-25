@@ -34,7 +34,7 @@ public class AddMoneyController extends HttpServlet {
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
 		int id=user.getId();
-		Payment payment=new Payment(request.getParameter("paymentid"), "Amount debited in Ewallet", Double.parseDouble(request.getParameter("amount")), id);
+		Payment payment=new Payment(request.getParameter("paymentid"), "Amount credited in Ewallet", Double.parseDouble(request.getParameter("amount")), id);
 		PaymentDao dao=new PaymentDao();
 		int i=dao.create(payment);
 		if(i>0) {
